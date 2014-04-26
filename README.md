@@ -1,4 +1,4 @@
-ludum-dare-29
+[INSERT GAME NAME HERE]
 =============
 
 Game for Ludum Dare 29
