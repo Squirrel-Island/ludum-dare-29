@@ -1,7 +1,13 @@
 var CD = {};
+
+// ELEMENTS
 CD.game = document.getElementById("game");
 CD.story = document.getElementById("story");
 CD.question = document.getElementById("question");
+CD.leftDialog = document.getElementById("leftDialog");
+CD.rightDialog = document.getElementById("rightDialog");
+
+// TEST OBJECTS
 CD.testStory = {
   content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas pellentesque elementum fringilla. Praesent semper ac risus in condimentum. Donec elementum magna at nibh ultrices lacinia. Integer sit amet imperdiet arcu, pulvinar fringilla nisl. Vivamus cursus, diam quis convallis ultricies, mi nisl feugiat dolor, non placerat tellus dui vitae lectus. Nam vestibulum vestibulum faucibus. Morbi ac lobortis nibh.",
   location: "story"
@@ -10,6 +16,14 @@ CD.testQuestion = {
   content: "Can I help you?",
   location: "question"
 };
+CD.testLeft = {
+  content: "I can't even right now.",
+  location: "leftDialog"
+}
+CD.testRight = {
+  content: "I am just so gratuitous.",
+  location: "rightDialog"
+}
 
 CD.playGame = function() {
   CD.createTextNode(CD.testStory);
@@ -29,10 +43,41 @@ CD.testFade = function() {
     CD.question.firstChild.classList.add("fadeOut");
     setTimeout(function(){CD.question.firstChild.remove();}, 2500);
   }
+
+  if (CD.leftDialog.firstChild != 'undefined' && CD.leftDialog.firstChild != null) {
+    CD.leftDialog.firstChild.classList.remove("fadeIn");
+    CD.leftDialog.firstChild.classList.add("fadeOut");
+    setTimeout(function(){CD.leftDialog.firstChild.remove();}, 2500);
+  }
+
+  if (CD.rightDialog.firstChild != 'undefined' && CD.rightDialog.firstChild != null) {
+    CD.rightDialog.firstChild.classList.remove("fadeIn");
+    CD.rightDialog.firstChild.classList.add("fadeOut");
+    setTimeout(function(){CD.rightDialog.firstChild.remove();}, 2500);
+  }
 }
 
 CD.createTextNode = function(object) {
   // removes node if it exists, thus, not the first time
+  // if ((CD.story.firstChild != 'undefined' && CD.story.firstChild != null) ||
+  //     (CD.question.firstChild != 'undefined' && CD.question.firstChild != null) ||
+  //     (CD.leftDialog.firstChild != 'undefined' && CD.leftDialog.firstChild != null) ||
+  //     (CD.rightDialog.firstChild != 'undefined' && CD.rightDialog.firstChild != null)) {
+  //       switch (object.location) {
+  //       case "story":
+  //         CD.story.firstChild.remove();
+  //         break;
+  //       case "question":
+  //         CD.question.firstChild.remove();
+  //         break;
+  //       case "leftDialog":
+  //         CD.leftDialog.firstChild.remove();
+  //         break;
+  //       case "rightDialog":
+  //         CD.rightDialog.firstChild.remove();
+  //         break;
+  //       }
+  //     }
   switch (object.location) {
   case "story":
     if (CD.story.firstChild != 'undefined' && CD.story.firstChild != null) {
@@ -44,7 +89,18 @@ CD.createTextNode = function(object) {
       CD.question.firstChild.remove();
     }
     break;
+  case "leftDialog":
+    if (CD.leftDialog.firstChild != 'undefined' && CD.leftDialog.firstChild != null) {
+      CD.leftDialog.firstChild.remove();
+    }
+    break;
+  case "rightDialog":
+    if (CD.rightDialog.firstChild != 'undefined' && CD.rightDialog.firstChild != null) {
+      CD.rightDialog.firstChild.remove();
+    }
+    break;
   }
+
   div = document.createElement("DIV");
   words = document.createTextNode(object.content);
   div.appendChild(words);
@@ -58,9 +114,19 @@ CD.createTextNode = function(object) {
   case "question":
     CD.question.appendChild(div);
     break;
+  case "leftDialog":
+    CD.leftDialog.appendChild(div);
+    break;
+  case "rightDialog":
+    CD.rightDialog.appendChild(div);
+    break;
   }
 }
 
 CD.battleMode = function() {
-  CD.game.style.backgroundImage="url('media/pictures/faces.png')";
+  if (CD.game.style.backgroundImage == "") {
+    CD.game.style.backgroundImage="url('media/pictures/faces.png')";
+  }
+  CD.createTextNode(CD.testLeft);
+  CD.createTextNode(CD.testRight);
 }

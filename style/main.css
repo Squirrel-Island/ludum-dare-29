@@ -13,6 +13,15 @@ h2 {
   margin-top: .25em;
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  color: #666;
+}
+
 #content {
   margin-left: auto;
   margin-right: auto;
@@ -30,6 +39,8 @@ h2 {
   background: #242424;
   text-align: center;
   color: white;
+  position: relative;
+  clear: both;
 }
 
 #story {
@@ -46,6 +57,21 @@ h2 {
   text-align: center;
 }
 
+.dialog {
+  width: 15em;
+  height: 10em;
+  color: black;
+}
+
+#leftDialog {
+  float: left;
+}
+
+#rightDialog {
+  float: right;
+}
+
 #nav {
   margin-top: .3em;
+  position: absolute;
 }
