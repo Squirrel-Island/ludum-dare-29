@@ -7,7 +7,15 @@ CD.playGame = function() {
   //CD.createTextNode("What is your favourite color?");
 }
 
+CD.testFade = function() {
+  CD.story.firstChild.classList.remove("fadeIn");
+  CD.story.firstChild.classList.add("fadeOut");
+}
+
 CD.createTextNode = function(text) {
+  if (CD.story.firstChild != 'undefined' && CD.story.firstChild != null) {
+    CD.story.firstChild.remove();
+  }
   div = document.createElement("DIV");
   words = document.createTextNode(text);
   div.appendChild(words);
