@@ -1,0 +1,25 @@
+body {
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 300;
+  background: url('../media/pictures/bg.png');
+}
+
+h1 {
+  font-size: 3em;
+}
+
+#title {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+}
+
+#game {
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+  height: 35em;
+  background: #242424;
+}
