@@ -8,18 +8,44 @@ h1 {
   font-size: 3em;
 }
 
-#title {
-  margin-top: 1em;
-  margin-bottom: 1em;
+h2 {
+  font-size: 1.25em;
+  margin-top: .25em;
+}
+
+#content {
   margin-left: auto;
   margin-right: auto;
-  width: 70%;
+  width: 62.5em;
+}
+
+#title {
+  margin-top: 2em;
+  margin-bottom: 1em;
 }
 
 #game {
-  margin-left: auto;
-  margin-right: auto;
-  width: 70%;
+  padding: 5px;
   height: 35em;
   background: #242424;
+  text-align: center;
+  color: white;
+}
+
+#story {
+  margin-top: 20%;
+  margin-bottom: 20%;
+  margin-left: 20%;
+  margin-right: 20%;
+  text-align: left;
+}
+
+#question {
+  margin-left: 30%;
+  margin-right: 30%;
+  text-align: center;
+}
+
+#nav {
+  margin-top: .3em;
 }

@@ -6,14 +6,23 @@
     <link rel="stylesheet" type="text/css" href="style/reset.css">
     <link rel="stylesheet" type="text/css" href="style/animate.css">
     <link rel="stylesheet" type="text/css" href="style/main.css">
-    <script type="text/javascript" src="js/main.js"></script>
     <title>NAME OF GAME</title>
   </head>
   <body>
-    <div id="title">
-      <h1>NAME OF GAME</h1>
-      <h2>Squirrel Island - Ludum Dare 29</h2>
+    <div id="content">
+      <div id="title">
+        <h1>NAME OF GAME</h1>
+        <h2>Squirrel Island - Ludum Dare 29</h2>
+      </div>
+      <div id="game">
+        <div id="question"></div>
+        <div id="story"></div>
+      </div>
+      <div id="nav">
+        <button onclick="CD.playGame()">Play</button>
+        <button onclick="CD.playGame()">Start Over</button>
+      </div>
     </div>
-    <div id="game"></div>
+    <script type="text/javascript" src="js/main.js"></script>
   </body>
 </html>
