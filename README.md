@@ -1,4 +1,4 @@
-[INSERT GAME NAME HERE]
+Cognitive Dissonance
 =============
 
 Game for Ludum Dare 29
