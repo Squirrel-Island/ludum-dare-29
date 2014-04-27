@@ -1,4 +1,5 @@
 var CD = {};
+CD.game = document.getElementById("game");
 CD.story = document.getElementById("story");
 CD.question = document.getElementById("question");
 CD.testStory = {
@@ -20,11 +21,13 @@ CD.testFade = function() {
   if (CD.story.firstChild != 'undefined' && CD.story.firstChild != null) {
     CD.story.firstChild.classList.remove("fadeIn");
     CD.story.firstChild.classList.add("fadeOut");
+    setTimeout(function(){CD.story.firstChild.remove();}, 2500);
   }
 
   if (CD.question.firstChild != 'undefined' && CD.question.firstChild != null) {
     CD.question.firstChild.classList.remove("fadeIn");
     CD.question.firstChild.classList.add("fadeOut");
+    setTimeout(function(){CD.question.firstChild.remove();}, 2500);
   }
 }
 
@@ -33,12 +36,12 @@ CD.createTextNode = function(object) {
   switch (object.location) {
   case "story":
     if (CD.story.firstChild != 'undefined' && CD.story.firstChild != null) {
-      CD.story.appendChild(div);
+      CD.story.firstChild.remove();
     }
     break;
   case "question":
     if (CD.question.firstChild != 'undefined' && CD.question.firstChild != null) {
-      CD.question.appendChild(div);
+      CD.question.firstChild.remove();
     }
     break;
   }
@@ -56,4 +59,8 @@ CD.createTextNode = function(object) {
     CD.question.appendChild(div);
     break;
   }
+}
+
+CD.battleMode = function() {
+  CD.game.style.backgroundImage="url('media/pictures/faces.png')";
 }
