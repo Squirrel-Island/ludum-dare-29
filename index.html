@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="style/main.css">
     <title>Cognitive Dissonance</title>
   </head>
-  <body>
+  <body onload="CD.playGame()">
     <div id="content">
       <div id="title">
         <h1><a href="#">Cognitive Dissonance</a></h1>
@@ -28,10 +28,13 @@
         <div class="dialog" id="rightDialog"></div>
       </div>
       <div id="nav">
-        <button onclick="CD.playGame()">Play</button>
-        <button onclick="CD.resetContent()">Reset Content</button>
-        <button onclick="CD.resetAll()">Reset All</button>
-        <button onclick="CD.advanceModule()">Advance Module</button>
+        <p>Click anywhere to advance the story. When two people appear, type your thought to best your evil self.</p>
+        <p style="display: none;">
+          <button onclick="CD.playGame()">Play</button>
+          <button onclick="CD.resetContent()">Reset Content</button>
+          <button onclick="CD.resetAll()">Reset All</button>
+          <button onclick="CD.advanceModule()">Advance Module</button>
+        </p>
       </div>
     </div>
     <script type="text/javascript" src="http://code.createjs.com/soundjs-0.5.2.min.js"></script>

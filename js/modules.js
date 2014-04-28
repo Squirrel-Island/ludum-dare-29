@@ -1,6 +1,10 @@
 var Modules = {};
 
 Modules.content = {
+  play: {
+    mode: "story",
+    content: ["Play"]
+  },
   story1: {
     mode: "story",
     content: ["There once was a kiddie.", "Little Willy"],
@@ -13,12 +17,12 @@ Modules.content = {
     bgm: "battle",
     content: [
       prompt1 = {
-        question: ["Should you kill this guy?"],
+        question: "Should you kill this guy?",
         good: "No, definitely not.",
         bad: "YES, kill him!"
       },
       prompt2 = {
-        question: ["Should you smack this guy?"],
+        question: "Should you smack this guy?",
         good: "Nope.",
         bad: "Yep"
       }

@@ -1,7 +1,10 @@
+@import url(http://fonts.googleapis.com/css?family=Special+Elite);
+
 body {
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 300;
   background: url('../media/img/bg.png');
+  color: white;
 }
 
 h1 {
@@ -15,7 +18,7 @@ h2 {
 
 a {
   text-decoration: none;
-  color: black;
+  color: white;
 }
 
 a:hover {
@@ -31,12 +34,13 @@ a:hover {
 #title {
   margin-top: 2em;
   margin-bottom: 1em;
+  font-family: 'Special Elite', 'cursive';
 }
 
 #game {
   padding: 5px;
   height: 35em;
-  background: #242424;
+  background: #000;
   text-align: center;
   position: relative;
   clear: both;
@@ -78,4 +82,5 @@ a:hover {
 #nav {
   margin-top: .3em;
   position: absolute;
+  font-family: 'Special Elite', 'cursive';
 }
