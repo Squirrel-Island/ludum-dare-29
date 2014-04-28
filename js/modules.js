@@ -7,7 +7,7 @@ Modules.content = {
   },
   story1: {
     mode: "story",
-    content: ["There once was a kiddie.", "Little Willy"],
+    content: ["There once was a kiddie.", "Little Willy", "UABHSKR GJBAKRJGBK AJBGKAJBGKJABGKA JBGKJBA."],
     bg: "faces.png",
     bgm: "story"
   },

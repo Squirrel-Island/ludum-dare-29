@@ -41,6 +41,7 @@ a:hover {
   padding: 5px;
   height: 35em;
   background: #000;
+  font-size: 1em;
   text-align: center;
   position: relative;
   clear: both;
@@ -52,11 +53,30 @@ a:hover {
   user-select: none;
 }
 
+#story, #question, #leftDialog, #rightDialog {
+  font-size: 1.75em;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: rgba(0,0,0,0.5)
+}
+
+#question, #leftDialog, #rightDialog {
+  color: #aaa;
+}
+
+.visible {
+  display: block;
+}
+
+.hidden {
+  display: none;
+}
+
 #story {
   margin-top: 20%;
   margin-bottom: 20%;
-  margin-left: 20%;
-  margin-right: 20%;
+  margin-left: 30%;
+  margin-right: 30%;
 }
 
 #question {
@@ -66,16 +86,13 @@ a:hover {
   text-align: center;
 }
 
-.dialog {
-  width: 15em;
-  height: 10em;
-}
-
 #leftDialog {
+  margin-left: 2em;
   float: left;
 }
 
 #rightDialog {
+  margin-right: 2em;
   float: right;
 }
 

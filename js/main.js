@@ -179,10 +179,36 @@ CD.setupStory = function(object) {
   CD.createText(object, object.content[CD.contentDataPointer], "story");
 };
 
+// Sets display none to unused text divs
+CD.fixDisplayCSS = function(mode) {
+  if (mode == "story") {
+    CD.question.classList.add("hidden");
+    CD.question.classList.remove("visible");
+    CD.leftDialog.classList.add("hidden");
+    CD.leftDialog.classList.remove("visible");
+    CD.rightDialog.classList.add("hidden");
+    CD.rightDialog.classList.remove("visible");
+    CD.story.classList.add("visible");
+    CD.story.classList.remove("hidden");
+  } else if (mode == "battle") {
+    CD.question.classList.add("visible");
+    CD.question.classList.remove("hidden");
+    CD.leftDialog.classList.add("visible");
+    CD.leftDialog.classList.remove("hidden");
+    CD.rightDialog.classList.add("visible");
+    CD.rightDialog.classList.remove("hidden");
+    CD.story.classList.add("hidden");
+    CD.story.classList.remove("visible");
+  } else {
+    console.log("Non story or battle mode detected!");
+  };
+};
+
 // Sets up display
 CD.build = function(object) {
   CD.removeText();
   CD.setBG(object);
+  CD.fixDisplayCSS(object.mode);
 
   if (object.mode == "story") {
     CD.setupStory(object);
@@ -257,8 +283,9 @@ CD.createText = function(object, content, location) {
   div.appendChild(words);
   div.classList.add("animated");
   div.classList.add("fadeIn");
+  CD.game.setAttribute("onclick", "null");
 
-  if (object.mode == "story") {
+  if (CD.gameData[CD.gameDataPointer].mode == "story") {
     if (object.content.length > (CD.contentDataPointer + 1)) {
       CD.game.setAttribute("onclick", "CD.advanceContent()");
     } else if (Object.keys(Modules.content).length > (CD.gameDataPointer + 1)) {
