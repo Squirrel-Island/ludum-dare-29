@@ -82,6 +82,10 @@ a:hover {
   text-align: center;
 }
 
+.centerQuestion {
+  margin-top: 20%;
+}
+
 #leftDialog, #rightDialog {
   margin-top: 40%;
   max-width: 12em;

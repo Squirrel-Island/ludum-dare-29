@@ -113,6 +113,8 @@ CD.lightLettersComp = function(battleData) {
 };
 
 CD.setupBattle = function(object) {
+  CD.question.style.marginTop = "20%";
+
   // Hide dialogs
   CD.leftDialog.classList.add("hidden");
   CD.leftDialog.classList.remove("visible");
@@ -174,6 +176,22 @@ CD.setupBattle = function(object) {
           }
       }
     }
+
+  var interDat = {
+    i: 20,
+    inter: null
+  };
+  interDat.inter = setInterval(function() {
+    interDat.i = interDat.i-2;
+    if(interDat.i>2)
+      CD.question.style.marginTop = interDat.i+"%";
+    else {
+      CD.question.style.marginTop = "2%";
+      clearInterval(interDat.inter);
+    }
+  }.bind(interDat),20);
+
+  // Show dialogs
   CD.leftDialog.classList.add("visible");
   CD.leftDialog.classList.remove("hidden");
   CD.rightDialog.classList.add("visible");
