@@ -8,7 +8,6 @@ Art: Christina Ramos
 
 var CD = {};
 CD.mentalState = 0;
-CD.mode = "story";
 CD.gameDataPointer = 0;
 CD.contentDataPointer = 0;
 
@@ -34,29 +33,34 @@ CD.advanceModule = function() {
 CD.advanceContent = function(object) {
   CD.contentDataPointer++;
   CD.build(CD.gameData[CD.gameDataPointer]);
-}
+};
+
+CD.setupBattle = function(object) {
+  CD.createText(object, object.content[CD.contentDataPointer].question, "question");
+  setTimeout(function(){
+    CD.createText(object, object.content[CD.contentDataPointer].good, "leftDialog");
+  }, 1500);
+  setTimeout(function(){
+    CD.createText(object, object.content[CD.contentDataPointer].bad, "rightDialog");
+  }, 1500);
+};
+
+CD.setupStory = function(object) {
+  setTimeout(function(){
+    CD.createText(object, object.content[CD.contentDataPointer], "story");
+  }, 1500);
+};
 
 // Sets up display
 CD.build = function(object) {
-  CD.mode = object.mode;
   CD.removeText();
-
-  if (object.bg != 'undefined' && object.bg != null && object.bg != CD.game.style.backgroundImage) {
-    CD.game.style.backgroundImage = "url(\'/media/pictures/" + object.bg + "\')";
-  };
+  CD.setBG(object);
+  //CD.playMusic(object);
 
   if (object.mode == "story") {
-    setTimeout(function(){
-      CD.createText(object, object.content[CD.contentDataPointer], "story");
-    }, 1500);
+    CD.setupStory(object);
   } else if (object.mode == "battle") {
-    CD.createText(object, object.content[CD.contentDataPointer].question, "question");
-    setTimeout(function(){
-      CD.createText(object, object.content[CD.contentDataPointer].good, "leftDialog");
-    }, 1500);
-    setTimeout(function(){
-      CD.createText(object, object.content[CD.contentDataPointer].bad, "rightDialog");
-    }, 1500);
+    CD.setupBattle(object);
   } else {
     console.log("Non story or battle mode detected!");
   };
@@ -92,7 +96,7 @@ CD.setup = function() {
 
 CD.setBG = function(object) {
   if (object.bg != 'undefined' && object.bg != null && object.bg != CD.game.style.backgroundImage) {
-    CD.game.style.backgroundImage = "url(\'/media/pictures/" + object.bg + "\')";
+    CD.game.style.backgroundImage = "url(\'/media/img/" + object.bg + "\')";
   };
 };
 
