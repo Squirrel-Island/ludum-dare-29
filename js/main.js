@@ -113,59 +113,72 @@ CD.lightLettersComp = function(battleData) {
 };
 
 CD.setupBattle = function(object) {
+  // Hide dialogs
+  CD.leftDialog.classList.add("hidden");
+  CD.leftDialog.classList.remove("visible");
+  CD.rightDialog.classList.add("hidden");
+  CD.rightDialog.classList.remove("visible");
+
   CD.createText(object, object.content[CD.contentDataPointer].question, "question");
-  CD.createText(object, object.content[CD.contentDataPointer].good, "leftDialog");
-  CD.createText(object, object.content[CD.contentDataPointer].bad, "rightDialog");
 
-  CD.battleData.player.txt = object.content[CD.contentDataPointer].good;
-  CD.battleData.computer.txt = object.content[CD.contentDataPointer].bad;
+  setTimeout(function(){
+    CD.createText(object, object.content[CD.contentDataPointer].good, "leftDialog");
+    CD.createText(object, object.content[CD.contentDataPointer].bad, "rightDialog");
 
-  CD.battleData.computer.interval = setInterval(function(){
-    var elem = CD.battleData.computer.elem;
-    var numLight = CD.battleData.computer.numLight;
-    var txt = CD.battleData.computer.txt;
+    CD.battleData.player.txt = object.content[CD.contentDataPointer].good;
+    CD.battleData.computer.txt = object.content[CD.contentDataPointer].bad;
 
-    //move the current element past any space
-    while(CD.battleData.computer.numLight < txt.length && txt.charAt(CD.battleData.computer.numLight) == ' ')
+    CD.battleData.computer.interval = setInterval(function(){
+      var elem = CD.battleData.computer.elem;
+      var numLight = CD.battleData.computer.numLight;
+      var txt = CD.battleData.computer.txt;
+
+      //move the current element past any space
+      while(CD.battleData.computer.numLight < txt.length && txt.charAt(CD.battleData.computer.numLight) == ' ')
+        CD.battleData.computer.numLight++;
+
       CD.battleData.computer.numLight++;
+      CD.lightLettersComp(CD.battleData.computer);
 
-    CD.battleData.computer.numLight++;
-    CD.lightLettersComp(CD.battleData.computer);
+      // Check to see if computer won
+      if (CD.battleData.computer.numLight == CD.battleData.computer.txt.length) {
+        CD.mentalState--;
+        CD.clearCombatantData();
+        CD.advanceContent();
+      }
 
-    // Check to see if computer won
-    if (CD.battleData.computer.numLight == CD.battleData.computer.txt.length) {
-      CD.mentalState--;
-      CD.clearCombatantData();
-      CD.advanceContent();
+    }, CD.battleData.computer.difficulty * 1000)
+
+    //listen for keypresses and handle them
+    document.onkeypress = function(event) {
+      var elem = CD.battleData.player.elem;
+      var numLight = CD.battleData.player.numLight;
+      var txt = CD.battleData.player.txt;
+
+      //move the current element past any space
+      while(numLight < txt.length && txt.charAt(numLight) == ' ')
+          numLight++;
+
+      CD.battleData.player.numLight = numLight;
+      //if the key press matches the current character, light the next char up
+      if(CD.keypress(event) === txt.charAt(numLight).toLowerCase()) {
+          CD.Assets.playSFX('pop', {volume: 1});
+          CD.battleData.player.numLight++;
+          CD.lightLetters(CD.battleData.player);
+
+          // Check to see if player won
+          if (CD.battleData.player.numLight == CD.battleData.player.txt.length) {
+            CD.mentalState++;
+            CD.clearCombatantData();
+            CD.advanceContent();
+          }
+      }
     }
-
-  }, CD.battleData.computer.difficulty * 1000)
-
-  //listen for keypresses and handle them
-  document.onkeypress = function(event) {
-    var elem = CD.battleData.player.elem;
-    var numLight = CD.battleData.player.numLight;
-    var txt = CD.battleData.player.txt;
-
-    //move the current element past any space
-    while(numLight < txt.length && txt.charAt(numLight) == ' ')
-        numLight++;
-
-    CD.battleData.player.numLight = numLight;
-    //if the key press matches the current character, light the next char up
-    if(CD.keypress(event) === txt.charAt(numLight).toLowerCase()) {
-        CD.Assets.playSFX('pop', {volume: 1});
-        CD.battleData.player.numLight++;
-        CD.lightLetters(CD.battleData.player);
-
-        // Check to see if player won
-        if (CD.battleData.player.numLight == CD.battleData.player.txt.length) {
-          CD.mentalState++;
-          CD.clearCombatantData();
-          CD.advanceContent();
-        }
-    }
-  };
+  CD.leftDialog.classList.add("visible");
+  CD.leftDialog.classList.remove("hidden");
+  CD.rightDialog.classList.add("visible");
+  CD.rightDialog.classList.remove("hidden");
+  }, 3000);
 };
 
 CD.clearCombatantData = function() {
@@ -187,19 +200,19 @@ CD.fixDisplayCSS = function(mode) {
   if (mode == "story") {
     CD.question.classList.add("hidden");
     CD.question.classList.remove("visible");
-    CD.leftDialog.classList.add("hidden");
-    CD.leftDialog.classList.remove("visible");
-    CD.rightDialog.classList.add("hidden");
-    CD.rightDialog.classList.remove("visible");
+    // CD.leftDialog.classList.add("hidden");
+    // CD.leftDialog.classList.remove("visible");
+    // CD.rightDialog.classList.add("hidden");
+    // CD.rightDialog.classList.remove("visible");
     CD.story.classList.add("visible");
     CD.story.classList.remove("hidden");
   } else if (mode == "battle") {
     CD.question.classList.add("visible");
     CD.question.classList.remove("hidden");
-    CD.leftDialog.classList.add("visible");
-    CD.leftDialog.classList.remove("hidden");
-    CD.rightDialog.classList.add("visible");
-    CD.rightDialog.classList.remove("hidden");
+    // CD.leftDialog.classList.add("visible");
+    // CD.leftDialog.classList.remove("hidden");
+    // CD.rightDialog.classList.add("visible");
+    // CD.rightDialog.classList.remove("hidden");
     CD.story.classList.add("hidden");
     CD.story.classList.remove("visible");
   } else {
