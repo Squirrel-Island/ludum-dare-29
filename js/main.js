@@ -88,10 +88,10 @@ CD.createText = function(object, content, location) {
 
   if (object.content.length > (CD.contentDataPointer + 1)) {
     div.setAttribute("onclick", "CD.advanceContent()");
-  } else if (object.content.length <= (CD.contentDataPointer + 1)) {
+  } else if (Object.keys(Modules.content).length > (CD.gameDataPointer + 1)) {
     div.setAttribute("onclick", "CD.advanceModule()");
   } else {
-    console.log("End of game.");
+    div.setAttribute("onclick", "alert('You won, congratulations!')");
   }
 
   switch (location) {
