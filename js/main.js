@@ -40,7 +40,16 @@ CD.gameData = [];
 CD.advanceModule = function() {
   CD.gameDataPointer++;
   CD.contentDataPointer = 0;
+
+  if (CD.gameData.length <= CD.gameDataPointer)
+    return;
+
   CD.build(CD.gameData[CD.gameDataPointer]);
+
+  if (CD.gameData[CD.gameDataPointer].bgm)
+    CD.Assets.playBGM(CD.gameData[CD.gameDataPointer].bgm);
+  if (CD.gameData[CD.gameDataPointer].sfx)
+    CD.Assets.playSFX(CD.gameData[CD.gameDataPointer].sfx);
 };
 
 // Advances through content array
@@ -186,7 +195,6 @@ CD.build = function(object) {
 
 CD.playGame = function() {
   CD.setup();
-  CD.build(CD.gameData[CD.gameDataPointer]);
 };
 
 // CLEANUP
@@ -210,12 +218,35 @@ CD.addSegment = function(object) {
 CD.setup = function() {
   for (key in Modules.content)
     this.addSegment(Modules.content[key])
+
+  CD.Assets.loadAssets([
+    {
+      type: "bgm",
+      id: "story",
+      fileName: "CD-story-track.ogg"
+    },
+    {
+      type: "bgm",
+      id: "battle",
+      fileName: "CD-battle-theme-2.ogg"
+    },
+    {
+      type: "img",
+      id: "battlePic",
+      fileName: "battle.jpg"
+    }
+  ], function(){
+    CD.build(CD.gameData[CD.gameDataPointer]);
+    if (CD.gameData[CD.gameDataPointer].bgm)
+      CD.Assets.playBGM(CD.gameData[CD.gameDataPointer].bgm);
+    if (CD.gameData[CD.gameDataPointer].sfx)
+      CD.Assets.playSFX(CD.gameData[CD.gameDataPointer].sfx);
+  })
 };
 
 CD.setBG = function(object) {
-  if (object.bg != 'undefined' && object.bg != null && object.bg != CD.game.style.backgroundImage) {
+  if (object.bg)
     CD.game.style.backgroundImage = "url(\'/media/img/" + object.bg + "\')";
-  };
 };
 
 // TEXT FUNCTIONS
@@ -229,13 +260,13 @@ CD.createText = function(object, content, location) {
 
   if (object.mode == "story") {
     if (object.content.length > (CD.contentDataPointer + 1)) {
-      div.setAttribute("onclick", "CD.advanceContent()");
-    } else if (Object.keys(Modules.content).length > (CD.gameDataPointer + 1)) {
-      div.setAttribute("onclick", "CD.advanceModule()");
-    } else {
-      div.setAttribute("onclick", "alert('You won, congratulations!')");
+      CD.game.setAttribute("onclick", "CD.advanceContent()");
+    } else if (CD.gameData.length < (CD.gameDataPointer + 1)) {
+      CD.game.setAttribute("onclick", "alert('You won, congratulations!')");
     }
-  };
+  } else {
+    CD.game.setAttribute("onclick", null);
+  }
 };
 
 CD.removeText = function() {

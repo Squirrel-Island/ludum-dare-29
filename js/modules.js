@@ -4,11 +4,13 @@ Modules.content = {
   story1: {
     mode: "story",
     content: ["There once was a kiddie.", "Little Willy"],
-    bg: "faces.png"
+    bg: "faces.png",
+    bgm: "story"
   },
   battle1: {
     mode: "battle",
-    bg: "faces.png",
+    bg: "battle.jpg",
+    bgm: "battle",
     content: [
       prompt1 = {
         question: ["Should you kill this guy?"],
@@ -24,6 +26,8 @@ Modules.content = {
   },
   story2: {
     mode: "story",
-    content: ["Wango McDango", "GodDarnBlango"]
+    content: ["Wango McDango", "GodDarnBlango"],
+    bg: "faces.png",
+    bgm: "story"
   }
 };
