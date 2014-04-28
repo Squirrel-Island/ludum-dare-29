@@ -10,6 +10,7 @@ var CD = {};
 CD.mentalState = 0;
 CD.mode = "story";
 CD.gameDataPointer = 0;
+CD.contentDataPointer = 0;
 
 // THE WHOLE GAME
 CD.gameData = [];
@@ -21,24 +22,6 @@ CD.question = document.getElementById("question");
 CD.leftDialog = document.getElementById("leftDialog");
 CD.rightDialog = document.getElementById("rightDialog");
 
-// TEST OBJECTS
-// CD.testStory = {
-//   content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas pellentesque elementum fringilla. Praesent semper ac risus in condimentum. Donec elementum magna at nibh ultrices lacinia. Integer sit amet imperdiet arcu, pulvinar fringilla nisl. Vivamus cursus, diam quis convallis ultricies, mi nisl feugiat dolor, non placerat tellus dui vitae lectus. Nam vestibulum vestibulum faucibus. Morbi ac lobortis nibh.",
-//   location: "story"
-// };
-// CD.testQuestion = {
-//   content: "Can I help you?",
-//   location: "question"
-// };
-// CD.testLeft = {
-//   content: "I can't even right now.",
-//   location: "leftDialog"
-// }
-// CD.testRight = {
-//   content: "I am just so gratuitous.",
-//   location: "rightDialog"
-// }
-
 // MAJOR FUNCTIONS
 CD.addSegment = function(object) {
   CD.gameData.push(object);
@@ -46,36 +29,47 @@ CD.addSegment = function(object) {
 
 // Moves to next gameData module
 CD.advanceModule = function() {
-  if (gameDataPointer != 0) {
-    gameDataPointer++;
+  if (CD.gameDataPointer != 0) {
+    CD.gameDataPointer++;
   }
 };
 
 // Advances through content array
-CD.advanceContent = function() {
+CD.advanceContent = function(object) {
+  // if (object.content.length > (CD.contentDataPointer + 1)) {
+  //
+  // }
 
+  if (CD.contentDataPointer != 0) {
+    CD.contentDataPointer++;
+  };
 }
 
 // Sets up display
 CD.build = function(object) {
   CD.mode = object.mode;
+  CD.removeText();
 
-  if (object.mode == "story") {
-    if object.bg != CD.game.style.backgroundImage {
-      CD.game.style.backgroundImage = "/media/images" + object.bg;
-    }
-  } else if (object.mode == "battle") {
-
-  } else {
-    alert "What the heck!?";
+  if (object.bg != 'undefined' && object.bg != null && object.bg != CD.game.style.backgroundImage) {
+    CD.game.style.backgroundImage = "url(\'/media/pictures/" + object.bg + "\')";
   };
 
-  object.content
+  if (object.mode == "story") {
+    CD.createText(object.content[CD.contentDataPointer], "story");
+  } else if (object.mode == "battle") {
+    CD.createText(object.content[CD.contentDataPointer].question, "question");
+    CD.createText(object.content[CD.contentDataPointer].good, "leftDialog");
+    CD.createText(object.content[CD.contentDataPointer].bad, "rightDialog");
+  } else {
+    console.log("Non story or battle mode detected!");
+  };
+
+
 };
 
 CD.playGame = function() {
   CD.setup();
-  CD.build();
+  CD.build(CD.gameData[CD.gameDataPointer]);
 };
 
 CD.reset = function() {
@@ -90,14 +84,14 @@ CD.setup = function() {
 };
 
 // TEXT FUNCTIONS
-CD.createText = function(object) {
+CD.createText = function(content, location) {
   div = document.createElement("DIV");
-  words = document.createTextNode(object.content);
+  words = document.createTextNode(content);
   div.appendChild(words);
   div.classList.add("animated");
   div.classList.add("fadeIn");
 
-  switch (object.location) {
+  switch (location) {
   case "story":
     CD.story.appendChild(div);
     break;
@@ -113,7 +107,7 @@ CD.createText = function(object) {
   }
 };
 
-CD.fadeText = function() {
+CD.removeText = function() {
   // removes node if it exists, fixes first node issue
   if (CD.story.firstChild != 'undefined' && CD.story.firstChild != null) {
     CD.story.firstChild.classList.remove("fadeIn");
@@ -140,27 +134,20 @@ CD.fadeText = function() {
   }
 };
 
-CD.removeText = function(object) {
-  switch (object.location) {
-  case "story":
-    if (CD.story.firstChild != 'undefined' && CD.story.firstChild != null) {
-      CD.story.firstChild.remove();
-    }
-    break;
-  case "question":
-    if (CD.question.firstChild != 'undefined' && CD.question.firstChild != null) {
-      CD.question.firstChild.remove();
-    }
-    break;
-  case "leftDialog":
-    if (CD.leftDialog.firstChild != 'undefined' && CD.leftDialog.firstChild != null) {
-      CD.leftDialog.firstChild.remove();
-    }
-    break;
-  case "rightDialog":
-    if (CD.rightDialog.firstChild != 'undefined' && CD.rightDialog.firstChild != null) {
-      CD.rightDialog.firstChild.remove();
-    }
-    break;
-  }
-};
+// CD.removeText = function() {
+//   if (CD.story.firstChild != 'undefined' && CD.story.firstChild != null) {
+//     CD.story.firstChild.remove();
+//   }
+//
+//   if (CD.question.firstChild != 'undefined' && CD.question.firstChild != null) {
+//     CD.question.firstChild.remove();
+//   }
+//
+//   if (CD.leftDialog.firstChild != 'undefined' && CD.leftDialog.firstChild != null) {
+//     CD.leftDialog.firstChild.remove();
+//   }
+//
+//   if (CD.rightDialog.firstChild != 'undefined' && CD.rightDialog.firstChild != null) {
+//     CD.rightDialog.firstChild.remove();
+//   }
+// };
