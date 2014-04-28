@@ -261,11 +261,11 @@ CD.createText = function(object, content, location) {
   if (object.mode == "story") {
     if (object.content.length > (CD.contentDataPointer + 1)) {
       CD.game.setAttribute("onclick", "CD.advanceContent()");
-    } else if (CD.gameData.length < (CD.gameDataPointer + 1)) {
+    } else if (Object.keys(Modules.content).length > (CD.gameDataPointer + 1)) {
+      CD.game.setAttribute("onclick", "CD.advanceModule()");
+    } else {
       CD.game.setAttribute("onclick", "alert('You won, congratulations!')");
     }
-  } else {
-    CD.game.setAttribute("onclick", null);
   }
 };
 
