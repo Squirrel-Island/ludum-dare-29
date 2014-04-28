@@ -1,4 +1,18 @@
+/*******************************
+Team: Squirrel Island
+Event: Ludum Dare 29
+Code: Nicholas La Roux
+Sound & Story: Robert Whitaker
+Art: Christina Ramos
+*******************************/
+
 var CD = {};
+CD.mentalState = 0;
+CD.mode = "story";
+CD.gameDataPointer = 0;
+
+// THE WHOLE GAME
+CD.gameData = [];
 
 // ELEMENTS
 CD.game = document.getElementById("game");
@@ -8,30 +22,99 @@ CD.leftDialog = document.getElementById("leftDialog");
 CD.rightDialog = document.getElementById("rightDialog");
 
 // TEST OBJECTS
-CD.testStory = {
-  content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas pellentesque elementum fringilla. Praesent semper ac risus in condimentum. Donec elementum magna at nibh ultrices lacinia. Integer sit amet imperdiet arcu, pulvinar fringilla nisl. Vivamus cursus, diam quis convallis ultricies, mi nisl feugiat dolor, non placerat tellus dui vitae lectus. Nam vestibulum vestibulum faucibus. Morbi ac lobortis nibh.",
-  location: "story"
+// CD.testStory = {
+//   content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas pellentesque elementum fringilla. Praesent semper ac risus in condimentum. Donec elementum magna at nibh ultrices lacinia. Integer sit amet imperdiet arcu, pulvinar fringilla nisl. Vivamus cursus, diam quis convallis ultricies, mi nisl feugiat dolor, non placerat tellus dui vitae lectus. Nam vestibulum vestibulum faucibus. Morbi ac lobortis nibh.",
+//   location: "story"
+// };
+// CD.testQuestion = {
+//   content: "Can I help you?",
+//   location: "question"
+// };
+// CD.testLeft = {
+//   content: "I can't even right now.",
+//   location: "leftDialog"
+// }
+// CD.testRight = {
+//   content: "I am just so gratuitous.",
+//   location: "rightDialog"
+// }
+
+// MAJOR FUNCTIONS
+CD.addSegment = function(object) {
+  CD.gameData.push(object);
 };
-CD.testQuestion = {
-  content: "Can I help you?",
-  location: "question"
+
+// Moves to next gameData module
+CD.advanceModule = function() {
+  if (gameDataPointer != 0) {
+    gameDataPointer++;
+  }
 };
-CD.testLeft = {
-  content: "I can't even right now.",
-  location: "leftDialog"
+
+// Advances through content array
+CD.advanceContent = function() {
+
 }
-CD.testRight = {
-  content: "I am just so gratuitous.",
-  location: "rightDialog"
-}
+
+// Sets up display
+CD.build = function(object) {
+  CD.mode = object.mode;
+
+  if (object.mode == "story") {
+    if object.bg != CD.game.style.backgroundImage {
+      CD.game.style.backgroundImage = "/media/images" + object.bg;
+    }
+  } else if (object.mode == "battle") {
+
+  } else {
+    alert "What the heck!?";
+  };
+
+  object.content
+};
 
 CD.playGame = function() {
-  CD.createTextNode(CD.testStory);
-  CD.createTextNode(CD.testQuestion);
-}
+  CD.setup();
+  CD.build();
+};
 
-CD.testFade = function() {
-  // removes node if it exists, thus, not the first time
+CD.reset = function() {
+  CD.fadeText();
+  CD.clearText();
+  CD.game.style.backgroundImage="";
+};
+
+CD.setup = function() {
+  for (key in Modules.content)
+    this.addSegment(Modules.content[key])
+};
+
+// TEXT FUNCTIONS
+CD.createText = function(object) {
+  div = document.createElement("DIV");
+  words = document.createTextNode(object.content);
+  div.appendChild(words);
+  div.classList.add("animated");
+  div.classList.add("fadeIn");
+
+  switch (object.location) {
+  case "story":
+    CD.story.appendChild(div);
+    break;
+  case "question":
+    CD.question.appendChild(div);
+    break;
+  case "leftDialog":
+    CD.leftDialog.appendChild(div);
+    break;
+  case "rightDialog":
+    CD.rightDialog.appendChild(div);
+    break;
+  }
+};
+
+CD.fadeText = function() {
+  // removes node if it exists, fixes first node issue
   if (CD.story.firstChild != 'undefined' && CD.story.firstChild != null) {
     CD.story.firstChild.classList.remove("fadeIn");
     CD.story.firstChild.classList.add("fadeOut");
@@ -55,29 +138,9 @@ CD.testFade = function() {
     CD.rightDialog.firstChild.classList.add("fadeOut");
     setTimeout(function(){CD.rightDialog.firstChild.remove();}, 2500);
   }
-}
+};
 
-CD.createTextNode = function(object) {
-  // removes node if it exists, thus, not the first time
-  // if ((CD.story.firstChild != 'undefined' && CD.story.firstChild != null) ||
-  //     (CD.question.firstChild != 'undefined' && CD.question.firstChild != null) ||
-  //     (CD.leftDialog.firstChild != 'undefined' && CD.leftDialog.firstChild != null) ||
-  //     (CD.rightDialog.firstChild != 'undefined' && CD.rightDialog.firstChild != null)) {
-  //       switch (object.location) {
-  //       case "story":
-  //         CD.story.firstChild.remove();
-  //         break;
-  //       case "question":
-  //         CD.question.firstChild.remove();
-  //         break;
-  //       case "leftDialog":
-  //         CD.leftDialog.firstChild.remove();
-  //         break;
-  //       case "rightDialog":
-  //         CD.rightDialog.firstChild.remove();
-  //         break;
-  //       }
-  //     }
+CD.removeText = function(object) {
   switch (object.location) {
   case "story":
     if (CD.story.firstChild != 'undefined' && CD.story.firstChild != null) {
@@ -100,33 +163,4 @@ CD.createTextNode = function(object) {
     }
     break;
   }
-
-  div = document.createElement("DIV");
-  words = document.createTextNode(object.content);
-  div.appendChild(words);
-  div.classList.add("animated");
-  div.classList.add("fadeIn");
-
-  switch (object.location) {
-  case "story":
-    CD.story.appendChild(div);
-    break;
-  case "question":
-    CD.question.appendChild(div);
-    break;
-  case "leftDialog":
-    CD.leftDialog.appendChild(div);
-    break;
-  case "rightDialog":
-    CD.rightDialog.appendChild(div);
-    break;
-  }
-}
-
-CD.battleMode = function() {
-  if (CD.game.style.backgroundImage == "") {
-    CD.game.style.backgroundImage="url('media/pictures/faces.png')";
-  }
-  CD.createTextNode(CD.testLeft);
-  CD.createTextNode(CD.testRight);
-}
+};
