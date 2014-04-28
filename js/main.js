@@ -10,6 +10,18 @@ var CD = {};
 CD.mentalState = 0;
 CD.gameDataPointer = 0;
 CD.contentDataPointer = 0;
+CD.battleData = {
+  player: {
+    numLight: 0,
+    elem: CD.leftDialog,
+    txt: ""
+  },
+  computer: {
+    numLight: 0,
+    elem: CD.rightDialog,
+    txt: ""
+  }
+};
 
 // THE WHOLE GAME
 CD.gameData = [];
@@ -43,6 +55,54 @@ CD.setupBattle = function(object) {
   setTimeout(function(){
     CD.createText(object, object.content[CD.contentDataPointer].bad, "rightDialog");
   }, 1500);
+
+  CD.setupCombatant(CD.battleData.player);
+  //CD.setupCombatant(CD.battleData.computer);
+};
+
+CD.setupCombatant = function(battleData) {
+  function light() {
+    var elem = battleData.elem;
+    var numLight = battleData.numLight;
+    var txt = battleData.txt;
+
+    //clear the text element
+    elem.innerHTML = "";
+    //create a new span element
+    var s = document.createElement("span");
+    //set the span element text to white
+    s.style.color = "#fff";
+    //put all the lit up elements into the white-text span
+    for(var i=0; i<numLight; i++) {
+        s.innerHTML += txt.charAt(i);
+    }
+    //add the span element to the text element
+    elem.appendChild(s);
+    //add the rest of the letters (the grey ones) to the text element
+    for(var i=numLight; i<txt.length; i++)
+        elem.innerHTML += txt.charAt(i);
+  };
+
+  //get key press and return the key as a character
+  function getKeyPress(e) {
+    var key = e.keyCode || e.which;
+    return String.fromCharCode(key);
+  };
+
+  //listen for keypresses and handle them
+  document.onkeypress = function(event) {
+    var numLight = battleData.numLight;
+    var txt = battleData.txt;
+
+    //move the current element past any space
+    while(numLight < txt.length && txt.charAt(numLight) == ' ')
+        numLight++;
+    //if the key press matches the current character, light the next char up
+    if(getKeyPress(event) === txt.charAt(numLight).toLowerCase()) {
+        numLight++;
+        light();
+    };
+  };
 };
 
 CD.setupStory = function(object) {
@@ -97,12 +157,6 @@ CD.setup = function() {
 CD.setBG = function(object) {
   if (object.bg != 'undefined' && object.bg != null && object.bg != CD.game.style.backgroundImage) {
     CD.game.style.backgroundImage = "url(\'/media/img/" + object.bg + "\')";
-  };
-};
-
-CD.playMusic = function(object) {
-  if (object.bg != 'undefined' && object.bg != null && object.bg != THE-CURRENT-SONG) {
-    // CODE TO SET MUSIC UP --- SOUNDJS
   };
 };
 
