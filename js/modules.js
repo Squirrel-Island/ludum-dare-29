@@ -94,6 +94,7 @@ Modules.content = {
     mode: "battle",
     bg: "battle.jpg",
     bgm: "battle",
+    difficulty: 3.5,
     content: [{
                 question: "Where's the harm in talking to the guy?",
                 good    : "I'm not sure how I may react.",
@@ -222,6 +223,7 @@ Modules.content = {
     mode: "battle",
     bg: "battle.jpg",
     bgm: "battle",
+    difficulty: 2.9,
     content: [{
           question: "Why not?",
           good    : "If I go in there, it will get out of control.",
@@ -372,56 +374,57 @@ Modules.content = {
     mode: "battle",
     bg: "battle.jpg",
     bgm: "battle",
+    difficulty: 3.5,
     content: [{
         question: "Kill him. Strangle the life out of that murderer! Kill... Kill. KILL!",
         good    : "I won't. I gave in before, and look where it got me. I won't lose to you again.",
         bad     : "Kill him. Choke him. END HIM! You know you want to!"
       },
-      // {
-      //   question: "Our hands are on his throat. He can't stop us. You can't stop us.",
-      //   good    : "I can let go. I don't need to listen to you. You... demon voice!",
-      //   bad     : "Together, we will end this man. You will listen."
-      // },
-      // {
-      //   question: "This is for our son. To let this man live is to abandon our dead child!",
-      //   good    : "And to kill this man now is to abandon my remaining daughter and my wife.",
-      //   bad     : "Our wife and kid will understand. They will COMMEND us!"
-      // },
-      // {
-      //   question: "If we don't end this now, the bastard will get off scot-free. Only we will lose!",
-      //   good    : "There is still a chance he will be prosecuted. But if I kill him now, I will lose everything.",
-      //   bad     : "If we kill him, we win. Don't let him take our son without punishment."
-      // },
-      // {
-      //   question: "I'll be thrown in jail for this. If I go through with this, I lose everything...",
-      //   good    : "If I don't let go of his throat, I will lose everything important to me with certainty.",
-      //   bad     : "It's a lose-lose situation, pal. At least if we kill him, we won't lose for nothing."
-      // },
-      // {
-      //   question: "What about my wife? How will she fare if I'm arrested for murder?",
-      //   good    : "She's a strong woman, but I can't put her through that. Especially after losing our son.",
-      //   bad     : "She's a tough one, bud. She'll be fine without you."
-      // },
-      // {
-      //   question: "And my daughter? She would lose her Daddy over one terrible decision!",
-      //   good    : "She already lost her brother. She loved him so much. I need to be there for her.",
-      //   bad     : "Our wife can take care of our daughter. They'd want you to do this."
-      // },
-      // {
-      //   question: "What about myself? I couldn't live with a murder on my hands.",
-      //   good    : "I don't want to live with blood on my hands and my son in the grave. I... couldn't.",
-      //   bad     : "You've already lost your son. It couldn't get worse."
-      // },
-      // {
-      //   question: "We can do this. We can handle it. Together.",
-      //   good    : "I refuse. I refuse to acknowledge you. You can only make things worse.",
-      //   bad     : "Come now, join me in one last endeavor. This is it!"
-      // },
-      // {
-      //   question: "So what'll it be, pal? Let this man free or take our revenge!?",
-      //   good    : "We have to let him free. I want revenge, but not this way.",
-      //   bad     : "There is no other way to get revenge."
-      // },
+      {
+        question: "Our hands are on his throat. He can't stop us. You can't stop us.",
+        good    : "I can let go. I don't need to listen to you. You... demon voice!",
+        bad     : "Together, we will end this man. You will listen."
+      },
+      {
+        question: "This is for our son. To let this man live is to abandon our dead child!",
+        good    : "And to kill this man now is to abandon my remaining daughter and my wife.",
+        bad     : "Our wife and kid will understand. They will COMMEND us!"
+      },
+      {
+        question: "If we don't end this now, the bastard will get off scot-free. Only we will lose!",
+        good    : "There is still a chance he will be prosecuted. But if I kill him now, I will lose everything.",
+        bad     : "If we kill him, we win. Don't let him take our son without punishment."
+      },
+      {
+        question: "I'll be thrown in jail for this. If I go through with this, I lose everything...",
+        good    : "If I don't let go of his throat, I will lose everything important to me with certainty.",
+        bad     : "It's a lose-lose situation, pal. At least if we kill him, we won't lose for nothing."
+      },
+      {
+        question: "What about my wife? How will she fare if I'm arrested for murder?",
+        good    : "She's a strong woman, but I can't put her through that. Especially after losing our son.",
+        bad     : "She's a tough one, bud. She'll be fine without you."
+      },
+      {
+        question: "And my daughter? She would lose her Daddy over one terrible decision!",
+        good    : "She already lost her brother. She loved him so much. I need to be there for her.",
+        bad     : "Our wife can take care of our daughter. They'd want you to do this."
+      },
+      {
+        question: "What about myself? I couldn't live with a murder on my hands.",
+        good    : "I don't want to live with blood on my hands and my son in the grave. I... couldn't.",
+        bad     : "You've already lost your son. It couldn't get worse."
+      },
+      {
+        question: "We can do this. We can handle it. Together.",
+        good    : "I refuse. I refuse to acknowledge you. You can only make things worse.",
+        bad     : "Come now, join me in one last endeavor. This is it!"
+      },
+      {
+        question: "So what'll it be, pal? Let this man free or take our revenge!?",
+        good    : "We have to let him free. I want revenge, but not this way.",
+        bad     : "There is no other way to get revenge."
+      },
       {
         question: "Last question. Do we wish to live... or die?",
         good    : "Live.",
@@ -435,6 +438,7 @@ Modules.endings = {
     good1_1: {
       mode: "story",
       bg: "jail-close.jpg",
+      bgm: "story",
       content: [
         "Questions race through my head. My hands are still clasped around the man's throat.",
 

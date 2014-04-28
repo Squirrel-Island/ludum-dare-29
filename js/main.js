@@ -27,8 +27,7 @@ CD.battleData = {
     numLight: 0,
     elem: CD.rightDialog,
     txt: "",
-    interval: null,
-    difficulty: 1
+    interval: null
   }
 };
 
@@ -161,7 +160,7 @@ CD.setupBattle = function(object) {
         CD.advanceContent();
       }
 
-    }, CD.battleData.computer.difficulty * 1000)
+    }, 1000 / CD.gameData[CD.gameDataPointer].difficulty)
 
     //listen for keypresses and handle them
     document.onkeypress = function(event) {
