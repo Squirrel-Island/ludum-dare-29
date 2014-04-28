@@ -27,7 +27,8 @@ CD.battleData = {
     numLight: 0,
     elem: CD.rightDialog,
     txt: "",
-    interval: null
+    interval: null,
+    difficulty: 1
   }
 };
 
@@ -80,19 +81,56 @@ CD.lightLetters = function(battleData) {
     elem.innerHTML += txt.charAt(i);
 };
 
+CD.lightLettersComp = function(battleData) {
+  var elem = battleData.elem;
+  var numLight = battleData.numLight;
+  var txt = battleData.txt;
+
+  //clear the text element
+  elem.innerHTML = "";
+  //create a new span element
+  var s = document.createElement("span");
+  //set the span element text to white
+  s.style.color = "#fff";
+  //put all the lit up elements into the white-text span
+  for(var i=0; i<numLight; i++) {
+    s.innerHTML += txt.charAt(i);
+  }
+  //add the span element to the text element
+  elem.appendChild(s);
+  //add the rest of the letters (the grey ones) to the text element
+  for(var i=numLight; i<txt.length; i++)
+    elem.innerHTML += txt.charAt(i);
+};
+
 CD.setupBattle = function(object) {
   CD.createText(object, object.content[CD.contentDataPointer].question, "question");
-  // setTimeout(function(){
-  //   CD.createText(object, object.content[CD.contentDataPointer].good, "leftDialog");
-  // }, 1500);
   CD.createText(object, object.content[CD.contentDataPointer].good, "leftDialog");
-  // setTimeout(function(){
-  //   CD.createText(object, object.content[CD.contentDataPointer].bad, "rightDialog");
-  // }, 1500);
   CD.createText(object, object.content[CD.contentDataPointer].bad, "rightDialog");
 
   CD.battleData.player.txt = object.content[CD.contentDataPointer].good;
   CD.battleData.computer.txt = object.content[CD.contentDataPointer].bad;
+
+  CD.battleData.computer.interval = setInterval(function(){
+    var elem = CD.battleData.computer.elem;
+    var numLight = CD.battleData.computer.numLight;
+    var txt = CD.battleData.computer.txt;
+
+    //move the current element past any space
+    while(CD.battleData.computer.numLight < txt.length && txt.charAt(CD.battleData.player.numLight) == ' ')
+      CD.battleData.computer.numLight++;
+
+    CD.battleData.computer.numLight++;
+    CD.lightLettersComp(CD.battleData.computer);
+
+    // Check to see if computer won
+    if (CD.battleData.computer.numLight == CD.battleData.computer.txt.length) {
+      CD.mentalState--;
+      CD.clearCombatantData();
+      CD.advanceContent();
+    }
+
+  }, CD.battleData.computer.difficulty * 1000)
 
   //listen for keypresses and handle them
   document.onkeypress = function(event) {
@@ -108,6 +146,7 @@ CD.setupBattle = function(object) {
         CD.battleData.player.numLight++;
         CD.lightLetters(CD.battleData.player);
 
+        // Check to see if player won
         if (CD.battleData.player.numLight == CD.battleData.player.txt.length) {
           CD.mentalState++;
           CD.clearCombatantData();
@@ -128,9 +167,6 @@ CD.clearCombatantData = function() {
 }
 
 CD.setupStory = function(object) {
-  // setTimeout(function(){
-  //   CD.createText(object, object.content[CD.contentDataPointer], "story");
-  // }, 1500);
   CD.createText(object, object.content[CD.contentDataPointer], "story");
 };
 
@@ -138,7 +174,6 @@ CD.setupStory = function(object) {
 CD.build = function(object) {
   CD.removeText();
   CD.setBG(object);
-  //CD.playMusic(object);
 
   if (object.mode == "story") {
     CD.setupStory(object);
@@ -185,7 +220,8 @@ CD.setBG = function(object) {
 
 // TEXT FUNCTIONS
 CD.createText = function(object, content, location) {
-  div = document.createElement("DIV");
+  div = document.getElementById(location);
+  div.innerHTML = "";
   words = document.createTextNode(content);
   div.appendChild(words);
   div.classList.add("animated");
@@ -200,58 +236,23 @@ CD.createText = function(object, content, location) {
       div.setAttribute("onclick", "alert('You won, congratulations!')");
     }
   };
-
-  // if (object.content.length > (CD.contentDataPointer + 1)) {
-  //   div.setAttribute("onclick", "CD.advanceContent()");
-  // } else if (Object.keys(Modules.content).length > (CD.gameDataPointer + 1)) {
-  //   div.setAttribute("onclick", "CD.advanceModule()");
-  // } else {
-  //   div.setAttribute("onclick", "alert('You won, congratulations!')");
-  // }
-
-  switch (location) {
-  case "story":
-    CD.story.appendChild(div);
-    break;
-  case "question":
-    CD.question.appendChild(div);
-    break;
-  case "leftDialog":
-    CD.leftDialog.appendChild(div);
-    break;
-  case "rightDialog":
-    CD.rightDialog.appendChild(div);
-    break;
-  }
 };
 
 CD.removeText = function() {
   // removes node if it exists, fixes first node issue
   if (CD.story.firstChild != 'undefined' && CD.story.firstChild != null) {
-    CD.story.firstChild.classList.remove("fadeIn");
-    CD.story.firstChild.classList.add("fadeOut");
-    // setTimeout(function(){CD.story.firstChild.remove();}, 1000);
-    CD.story.firstChild.remove();
+    CD.story.innerHTML = "";
   }
 
   if (CD.question.firstChild != 'undefined' && CD.question.firstChild != null) {
-    CD.question.firstChild.classList.remove("fadeIn");
-    CD.question.firstChild.classList.add("fadeOut");
-    // setTimeout(function(){CD.question.firstChild.remove();}, 2000);
-    CD.question.firstChild.remove();
+    CD.question.innerHTML = "";
   }
 
   if (CD.leftDialog.firstChild != 'undefined' && CD.leftDialog.firstChild != null) {
-    CD.leftDialog.firstChild.classList.remove("fadeIn");
-    CD.leftDialog.firstChild.classList.add("fadeOut");
-    // setTimeout(function(){CD.leftDialog.firstChild.remove();}, 2000);
-    CD.leftDialog.firstChild.remove();
+    CD.leftDialog.innerHTML = "";
   }
 
   if (CD.rightDialog.firstChild != 'undefined' && CD.rightDialog.firstChild != null) {
-    CD.rightDialog.firstChild.classList.remove("fadeIn");
-    CD.rightDialog.firstChild.classList.add("fadeOut");
-    // setTimeout(function(){CD.rightDialog.firstChild.remove();}, 2000);
-    CD.rightDialog.firstChild.remove();
+    CD.rightDialog.innerHTML = "";
   }
 };
