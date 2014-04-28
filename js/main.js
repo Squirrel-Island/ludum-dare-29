@@ -47,7 +47,7 @@ CD.advanceModule = function() {
   CD.build(CD.gameData[CD.gameDataPointer]);
 
   if (CD.gameData[CD.gameDataPointer].bgm)
-    CD.Assets.playBGM(CD.gameData[CD.gameDataPointer].bgm);
+    CD.Assets.playBGM(CD.gameData[CD.gameDataPointer].bgm, {volume: 0.6});
   if (CD.gameData[CD.gameDataPointer].sfx)
     CD.Assets.playSFX(CD.gameData[CD.gameDataPointer].sfx);
 };
@@ -126,7 +126,7 @@ CD.setupBattle = function(object) {
     var txt = CD.battleData.computer.txt;
 
     //move the current element past any space
-    while(CD.battleData.computer.numLight < txt.length && txt.charAt(CD.battleData.player.numLight) == ' ')
+    while(CD.battleData.computer.numLight < txt.length && txt.charAt(CD.battleData.computer.numLight) == ' ')
       CD.battleData.computer.numLight++;
 
     CD.battleData.computer.numLight++;
@@ -148,10 +148,13 @@ CD.setupBattle = function(object) {
     var txt = CD.battleData.player.txt;
 
     //move the current element past any space
-    while(CD.battleData.player.numLight < txt.length && txt.charAt(CD.battleData.player.numLight) == ' ')
-        CD.battleData.player.numLight++;
+    while(numLight < txt.length && txt.charAt(numLight) == ' ')
+        numLight++;
+
+    CD.battleData.player.numLight = numLight;
     //if the key press matches the current character, light the next char up
     if(CD.keypress(event) === txt.charAt(numLight).toLowerCase()) {
+        CD.Assets.playSFX('pop', {volume: 1});
         CD.battleData.player.numLight++;
         CD.lightLetters(CD.battleData.player);
 
@@ -257,14 +260,29 @@ CD.setup = function() {
       fileName: "CD-battle-theme-2.ogg"
     },
     {
+      type: "sfx",
+      id  : "pop",
+      fileName: "pop.ogg"
+    },
+    {
       type: "img",
       id: "battlePic",
       fileName: "battle.jpg"
-    }
+    },
+    {
+      type: "img",
+      id: "jail-close",
+      fileName: "jail-close.jpg"
+    },
+    {
+      type: "img",
+      id: "jail-far",
+      fileName: "jail-far.jpg"
+    },
   ], function(){
     CD.build(CD.gameData[CD.gameDataPointer]);
     if (CD.gameData[CD.gameDataPointer].bgm)
-      CD.Assets.playBGM(CD.gameData[CD.gameDataPointer].bgm);
+      CD.Assets.playBGM(CD.gameData[CD.gameDataPointer].bgm,{volume: 0.6});
     if (CD.gameData[CD.gameDataPointer].sfx)
       CD.Assets.playSFX(CD.gameData[CD.gameDataPointer].sfx);
   })
