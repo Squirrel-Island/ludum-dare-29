@@ -13,7 +13,7 @@ CD.story = document.getElementById("story");
 CD.question = document.getElementById("question");
 CD.leftDialog = document.getElementById("leftDialog");
 CD.rightDialog = document.getElementById("rightDialog");
-
+CD.isEnding = false;
 CD.mentalState = 0;
 CD.gameDataPointer = 0;
 CD.contentDataPointer = 0;
@@ -41,8 +41,20 @@ CD.advanceModule = function() {
   CD.gameDataPointer++;
   CD.contentDataPointer = 0;
 
-  if (CD.gameData.length <= CD.gameDataPointer)
-    return;
+  if (CD.gameData.length <= CD.gameDataPointer && !CD.isEnding) {
+    if (CD.mentalState < 0)
+      for (key in Modules.endings.bad)
+        CD.addSegment(Modules.endings.bad[key])
+    else if (CD.mentalState == 0)
+      for (key in Modules.endings.neutral)
+        CD.addSegment(Modules.endings.neutral[key])
+    else
+      for (key in Modules.endings.good)
+        CD.addSegment(Modules.endings.good[key])
+    CD.isEnding = true;
+    CD.gameDataPointer--;
+    CD.advanceModule();
+  }
 
   CD.build(CD.gameData[CD.gameDataPointer]);
 
@@ -340,7 +352,17 @@ CD.createText = function(object, content, location) {
     } else if (Object.keys(Modules.content).length > (CD.gameDataPointer + 1)) {
       CD.game.setAttribute("onclick", "CD.advanceModule()");
     } else {
-      CD.game.setAttribute("onclick", "alert('You won, congratulations!')");
+      // CD.game.setAttribute("onclick", "alert('You won, congratulations!')");
+      if (CD.mentalState < 0)
+        for (key in Modules.endings.bad)
+          CD.addSegment(Modules.endings[key])
+      else if (CD.mentalState == 0)
+        for (key in Modules.endings.neutral)
+          CD.addSegment(Modules.endings[key])
+      else
+        for (key in Modules.endings.good)
+          CD.addSegment(Modules.endings[key])
+      CD.advanceModule();
     }
   }
 };

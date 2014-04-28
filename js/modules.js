@@ -377,51 +377,51 @@ Modules.content = {
         good    : "I won't. I gave in before, and look where it got me. I won't lose to you again.",
         bad     : "Kill him. Choke him. END HIM! You know you want to!"
       },
-      {
-        question: "Our hands are on his throat. He can't stop us. You can't stop us.",
-        good    : "I can let go. I don't need to listen to you. You... demon voice!",
-        bad     : "Together, we will end this man. You will listen."
-      },
-      {
-        question: "This is for our son. To let this man live is to abandon our dead child!",
-        good    : "And to kill this man now is to abandon my remaining daughter and my wife.",
-        bad     : "Our wife and kid will understand. They will COMMEND us!"
-      },
-      {
-        question: "If we don't end this now, the bastard will get off scot-free. Only we will lose!",
-        good    : "There is still a chance he will be prosecuted. But if I kill him now, I will lose everything.",
-        bad     : "If we kill him, we win. Don't let him take our son without punishment."
-      },
-      {
-        question: "I'll be thrown in jail for this. If I go through with this, I lose everything...",
-        good    : "If I don't let go of his throat, I will lose everything important to me with certainty.",
-        bad     : "It's a lose-lose situation, pal. At least if we kill him, we won't lose for nothing."
-      },
-      {
-        question: "What about my wife? How will she fare if I'm arrested for murder?",
-        good    : "She's a strong woman, but I can't put her through that. Especially after losing our son.",
-        bad     : "She's a tough one, bud. She'll be fine without you."
-      },
-      {
-        question: "And my daughter? She would lose her Daddy over one terrible decision!",
-        good    : "She already lost her brother. She loved him so much. I need to be there for her.",
-        bad     : "Our wife can take care of our daughter. They'd want you to do this."
-      },
-      {
-        question: "What about myself? I couldn't live with a murder on my hands.",
-        good    : "I don't want to live with blood on my hands and my son in the grave. I... couldn't.",
-        bad     : "You've already lost your son. It couldn't get worse."
-      },
-      {
-        question: "We can do this. We can handle it. Together.",
-        good    : "I refuse. I refuse to acknowledge you. You can only make things worse.",
-        bad     : "Come now, join me in one last endeavor. This is it!"
-      },
-      {
-        question: "So what'll it be, pal? Let this man free or take our revenge!?",
-        good    : "We have to let him free. I want revenge, but not this way.",
-        bad     : "There is no other way to get revenge."
-      },
+      // {
+      //   question: "Our hands are on his throat. He can't stop us. You can't stop us.",
+      //   good    : "I can let go. I don't need to listen to you. You... demon voice!",
+      //   bad     : "Together, we will end this man. You will listen."
+      // },
+      // {
+      //   question: "This is for our son. To let this man live is to abandon our dead child!",
+      //   good    : "And to kill this man now is to abandon my remaining daughter and my wife.",
+      //   bad     : "Our wife and kid will understand. They will COMMEND us!"
+      // },
+      // {
+      //   question: "If we don't end this now, the bastard will get off scot-free. Only we will lose!",
+      //   good    : "There is still a chance he will be prosecuted. But if I kill him now, I will lose everything.",
+      //   bad     : "If we kill him, we win. Don't let him take our son without punishment."
+      // },
+      // {
+      //   question: "I'll be thrown in jail for this. If I go through with this, I lose everything...",
+      //   good    : "If I don't let go of his throat, I will lose everything important to me with certainty.",
+      //   bad     : "It's a lose-lose situation, pal. At least if we kill him, we won't lose for nothing."
+      // },
+      // {
+      //   question: "What about my wife? How will she fare if I'm arrested for murder?",
+      //   good    : "She's a strong woman, but I can't put her through that. Especially after losing our son.",
+      //   bad     : "She's a tough one, bud. She'll be fine without you."
+      // },
+      // {
+      //   question: "And my daughter? She would lose her Daddy over one terrible decision!",
+      //   good    : "She already lost her brother. She loved him so much. I need to be there for her.",
+      //   bad     : "Our wife can take care of our daughter. They'd want you to do this."
+      // },
+      // {
+      //   question: "What about myself? I couldn't live with a murder on my hands.",
+      //   good    : "I don't want to live with blood on my hands and my son in the grave. I... couldn't.",
+      //   bad     : "You've already lost your son. It couldn't get worse."
+      // },
+      // {
+      //   question: "We can do this. We can handle it. Together.",
+      //   good    : "I refuse. I refuse to acknowledge you. You can only make things worse.",
+      //   bad     : "Come now, join me in one last endeavor. This is it!"
+      // },
+      // {
+      //   question: "So what'll it be, pal? Let this man free or take our revenge!?",
+      //   good    : "We have to let him free. I want revenge, but not this way.",
+      //   bad     : "There is no other way to get revenge."
+      // },
       {
         question: "Last question. Do we wish to live... or die?",
         good    : "Live.",
@@ -431,202 +431,219 @@ Modules.content = {
 };
 
 Modules.endings = {
-  good1_1: {
+  good: {
+    good1_1: {
+      mode: "story",
+      bg: "jail-close.jpg",
+      content: [
+        "Questions race through my head. My hands are still clasped around the man's throat.",
+
+        "He killed my son. But I have a family. ",
+
+        "They need me, now more than ever.",
+
+        "I can't abandon them.",
+
+        "My grip loosens. The man falls to the ground.",
+
+        "\"I'm going to let you live. A privilege you stole from my son.\"",
+
+        "He gasps, and as the air enters his lungs, I know I made the right decision.",
+
+        "He watches warily as I leave the cell, locking it behind me."
+      ]
+    },
+    good1_2: {
+      mode: "story",
+      bg: "jail-far.jpg",
+      content: [
+        "I don't look back.",
+
+        "I never look back.",
+
+        "I depart the prison for good, leaving behind only a resignation."
+      ]
+    },
+    good1_3: {
+      mode: "story",
+      bg: true,
+      content: [
+        "Days pass, and I watch the news. Read the paper.",
+
+        "There will be something on that man's case. I know it.",
+
+        "And one day, there is.",
+
+        "He has been sent to prison.",
+
+        "Vehicular manslaughter. Max sentence.",
+
+        "Maybe there is such a thing as retribution after all.",
+
+        "His family paid for the best lawyers.",
+
+        "They even tried to tip off the judge.",
+
+        "But to no avail.",
+
+        "I am grateful for that.",
+
+        "I watch the story on the television.",
+
+        "My wife is in my arms,",
+
+        "my daughter lying in my lap.",
+
+        "And I smile.",
+
+        "Somewhere, my son is watching us.",
+
+        "He is smiling too.",
+
+        "~ Play Again For Other Endings ~",
+
+        "HAVE A GREAT LIFE"
+      ]
+    },
+    good_end: {
+      mode: "story",
+      end: true,
+      note: "Good ending."
+    }
+  },
+
+  neutral: {
+    neutral1_1: {
+      mode: "story",
+      bg: "jail-far.jpg",
+      bgm: "story",
+      content: [
+        "I loosen my grip on the man's throat.",
+
+        "I can't kill him.",
+
+        "But I can't stand to see him go free either.",
+
+        "Without a word, I exit the cell.",
+
+        "And lock it.",
+
+        "That day I resign from my job."
+      ]
+    },
+    neutral1_2: {
+      mode: "story",
+      bg: true,
+      content: [
+        "I tell my family we're moving.",
+
+        "There's a nice town overlooking a lake to the north.",
+
+        "We can start fresh there.",
+
+        "I stop following the news.",
+
+        "I'm sure my son's case will come up...",
+
+        "... but I can't bear to see the result.",
+
+        "It would be too painful.",
+
+        "I suppose I'll never know how it turns out.",
+
+        "And perhaps that's okay.",
+
+        "~ Play Again For Other Endings ~",
+
+        "HAVE A GREAT LIFE"
+      ]
+    },
+    neutral_end: {
+      mode: "story",
+      end: true,
+      note: "Neutral ending."
+    }
+  },
+
+  bad: {
+    bad1_1: {
     mode: "story",
-    bgm: "story",
     bg: "jail-close.jpg",
-    content: [
-      "Questions race through my head. My hands are still clasped around the man's throat.",
-
-      "He killed my son. But I have a family. ",
-
-      "They need me, now more than ever.",
-
-      "I can't abandon them.",
-
-      "My grip loosens. The man falls to the ground.",
-
-      "\"I'm going to let you live. A privilege you stole from my son.\"",
-
-      "He gasps, and as the air enters his lungs, I know I made the right decision.",
-
-      "He watches warily as I leave the cell, locking it behind me."
-    ]
-  },
-  good1_2: {
-    mode: "story",
-    bg: "jail-far.jpg",
-    content: [
-      "I don't look back.",
-
-      "I never look back.",
-
-      "I depart the prison for good, leaving behind only a resignation."
-    ]
-  },
-  good1_3: {
-    mode: "story",
-    bg: true,
-    content: [
-      "Days pass, and I watch the news. Read the paper.",
-
-      "There will be something on that man's case. I know it.",
-
-      "And one day, there is.",
-
-      "He has been sent to prison.",
-
-      "Vehicular manslaughter. Max sentence.",
-
-      "Maybe there is such a thing as retribution after all.",
-
-      "His family paid for the best lawyers.",
-
-      "They even tried to tip off the judge.",
-
-      "But to no avail.",
-
-      "I am grateful for that.",
-
-      "I watch the story on the television.",
-
-      "My wife is in my arms,",
-
-      "my daughter lying in my lap.",
-
-      "And I smile.",
-
-      "Somewhere, my son is watching us.",
-
-      "He is smiling too."
-    ]
-  },
-  good_end: {
-    mode: "story",
-    end: true,
-    note: "Good ending."
-  },
-
-  neutral1_1: {
-    mode: "story",
-    bg: "jail-far.jpg",
     bgm: "story",
     content: [
-      "I loosen my grip on the man's throat.",
+      "I grip the man's throat tighter.",
 
-      "I can't kill him.",
+      "I want to squeeze the life out of him.",
 
-      "But I can't stand to see him go free either.",
+      "Need to.",
 
-      "Without a word, I exit the cell.",
+      "His eyes bulge, and his lips turn blue.",
 
-      "And lock it.",
+      "Choking, gagging.",
 
-      "That day I resign from my job."
+      "He reaches weakly for my wrist.",
+
+      "Then, he stops struggling.",
+
+      "It's over.",
+
+      "I look at my hands.",
+
+      "They are slick with blood.",
+
+      "And I look at the bruises on his neck.",
+
+      "They are shaped like my hands.",
+
+      "What have I done?",
+
+      "My son is dead.",
+
+      "And I have killed a man.",
+
+      "I can't go back to my wife and daughter.",
+
+      "I can't go back to myself.",
+
+      "The fiendish voice in my head snickers, and I want it gone.",
+
+      "I want everything gone.",
+
+      "What am I?",
+
+      "A father?",
+
+      "A husband?",
+
+      "...",
+
+      "A murderer?",
+
+      "I reach for my waist and remove my gun from its holster.",
+
+      "Standing in this dreary cell, next to the corpse of my child's killer...",
+
+      "... I raise the gun to my head.",
+
+      "A single tear escapes my eye.",
+
+      "I say goodbye to my wife and daughter.",
+
+      "I do not say goodbye to myself.",
+
+      "I died a long time ago.",
+
+      "And I pull the trigger.",
+
+      "~ Play Again For Other Endings ~",
+
+      "HAVE A GREAT LIFE"
     ]
-  },
-  neutral1_2: {
-    mode: "story",
-    bg: true,
-    content: [
-      "I tell my family we're moving.",
-
-      "There's a nice town overlooking a lake to the north.",
-
-      "We can start fresh there.",
-
-      "I stop following the news.",
-
-      "I'm sure my son's case will come up...",
-
-      "... but I can't bear to see the result.",
-
-      "It would be too painful.",
-
-      "I suppose I'll never know how it turns out.",
-
-      "And perhaps that's okay."
-    ]
-  },
-  neutral_end: {
-    mode: "story",
-    end: true,
-    note: "Neutral ending."
-  },
-
-  bad1_1: {
-  mode: "story",
-  bg: "jail-close.jpg",
-  bgm: "story",
-  content: [
-    "I grip the man's throat tighter.",
-
-    "I want to squeeze the life out of him.",
-
-    "Need to.",
-
-    "His eyes bulge, and his lips turn blue.",
-
-    "Choking, gagging.",
-
-    "He reaches weakly for my wrist.",
-
-    "Then, he stops struggling.",
-
-    "It's over.",
-
-    "I look at my hands.",
-
-    "They are slick with blood.",
-
-    "And I look at the bruises on his neck.",
-
-    "They are shaped like my hands.",
-
-    "What have I done?",
-
-    "My son is dead.",
-
-    "And I have killed a man.",
-
-    "I can't go back to my wife and daughter.",
-
-    "I can't go back to myself.",
-
-    "The fiendish voice in my head snickers, and I want it gone.",
-
-    "I want everything gone.",
-
-    "What am I?",
-
-    "A father?",
-
-    "A husband?",
-
-    "...",
-
-    "A murderer?",
-
-    "I reach for my waist and remove my gun from its holster.",
-
-    "Standing in this dreary cell, next to the corpse of my child's killer...",
-
-    "... I raise the gun to my head.",
-
-    "A single tear escapes my eye.",
-
-    "I say goodbye to my wife and daughter.",
-
-    "I do not say goodbye to myself.",
-
-    "I died a long time ago.",
-
-    "And I pull the trigger."
-  ]
-  },
-    bad_end: {
-    mode: "story",
-    end: true,
-    note: "Bad ending."
+    },
+      bad_end: {
+      mode: "story",
+      end: true,
+      note: "Bad ending."
+    }
   }
 };
