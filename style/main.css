@@ -39,8 +39,9 @@ a:hover {
 
 #game {
   padding: 5px;
-  height: 35em;
+  height: 34.4em;
   background: #000;
+  background-repeat: no-repeat;
   font-size: 1em;
   text-align: center;
   position: relative;
@@ -87,6 +88,7 @@ a:hover {
 }
 
 #leftDialog, #rightDialog {
+  margin-bottom: 1em;
   margin-top: 40%;
   max-width: 12em;
   color: #aaa;
