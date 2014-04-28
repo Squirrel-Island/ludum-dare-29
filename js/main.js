@@ -55,8 +55,12 @@ CD.build = function(object) {
     }, 1500);
   } else if (object.mode == "battle") {
     CD.createText(object, object.content[CD.contentDataPointer].question, "question");
-    CD.createText(object, object.content[CD.contentDataPointer].good, "leftDialog");
-    CD.createText(object, object.content[CD.contentDataPointer].bad, "rightDialog");
+    setTimeout(function(){
+      CD.createText(object, object.content[CD.contentDataPointer].good, "leftDialog");
+    }, 1500);
+    setTimeout(function(){
+      CD.createText(object, object.content[CD.contentDataPointer].bad, "rightDialog");
+    }, 1500);
   } else {
     console.log("Non story or battle mode detected!");
   };
@@ -68,9 +72,9 @@ CD.playGame = function() {
 };
 
 CD.reset = function() {
-  CD.fadeText();
-  CD.clearText();
-  CD.game.style.backgroundImage="";
+  CD.gameDataPointer = 0;
+  CD.contentDataPointer = 0;
+  CD.build(CD.gameData[0]);
 };
 
 CD.setup = function() {
@@ -85,6 +89,17 @@ CD.createText = function(object, content, location) {
   div.appendChild(words);
   div.classList.add("animated");
   div.classList.add("fadeIn");
+
+  // EVENTUALLY FOR WHEN ACTUAL BATTLES START
+  // if (object.mode == "story") {
+  //   if (object.content.length > (CD.contentDataPointer + 1)) {
+  //     div.setAttribute("onclick", "CD.advanceContent()");
+  //   } else if (Object.keys(Modules.content).length > (CD.gameDataPointer + 1)) {
+  //     div.setAttribute("onclick", "CD.advanceModule()");
+  //   } else {
+  //     div.setAttribute("onclick", "alert('You won, congratulations!')");
+  //   }
+  // };
 
   if (object.content.length > (CD.contentDataPointer + 1)) {
     div.setAttribute("onclick", "CD.advanceContent()");
