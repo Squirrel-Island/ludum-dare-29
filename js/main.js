@@ -22,11 +22,7 @@ CD.question = document.getElementById("question");
 CD.leftDialog = document.getElementById("leftDialog");
 CD.rightDialog = document.getElementById("rightDialog");
 
-// MAJOR FUNCTIONS
-CD.addSegment = function(object) {
-  CD.gameData.push(object);
-};
-
+// GAME PROGRESSION
 // Moves to next gameData module
 CD.advanceModule = function() {
   CD.gameDataPointer++;
@@ -71,15 +67,39 @@ CD.playGame = function() {
   CD.build(CD.gameData[CD.gameDataPointer]);
 };
 
-CD.reset = function() {
-  CD.gameDataPointer = 0;
+// CLEANUP
+CD.resetContent = function() {
+  CD.removeText();
   CD.contentDataPointer = 0;
-  CD.build(CD.gameData[0]);
+  CD.game.style.backgroundImage = "";
+}
+
+CD.resetAll = function() {
+  CD.resetContent();
+  CD.gameDataPointer = 0;
 };
 
+// SETUP
+CD.addSegment = function(object) {
+  CD.gameData.push(object);
+};
+
+// Adds all modules to the gameData variable
 CD.setup = function() {
   for (key in Modules.content)
     this.addSegment(Modules.content[key])
+};
+
+CD.setBG = function(object) {
+  if (object.bg != 'undefined' && object.bg != null && object.bg != CD.game.style.backgroundImage) {
+    CD.game.style.backgroundImage = "url(\'/media/pictures/" + object.bg + "\')";
+  };
+};
+
+CD.playMusic = function(object) {
+  if (object.bg != 'undefined' && object.bg != null && object.bg != THE-CURRENT-SONG) {
+    // CODE TO SET MUSIC UP --- SOUNDJS
+  };
 };
 
 // TEXT FUNCTIONS
