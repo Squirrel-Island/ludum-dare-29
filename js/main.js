@@ -332,7 +332,7 @@ CD.setup = function() {
 
 CD.setBG = function(object) {
   if (object.bg)
-    CD.game.style.backgroundImage = "url(\'/media/img/" + object.bg + "\')";
+    CD.game.style.backgroundImage = "url('media/img/" + object.bg + "')";
 };
 
 // TEXT FUNCTIONS
