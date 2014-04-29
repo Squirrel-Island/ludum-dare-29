@@ -174,7 +174,7 @@ CD.setupBattle = function(object) {
 
       CD.battleData.player.numLight = numLight;
       //if the key press matches the current character, light the next char up
-      if(CD.keypress(event) === txt.charAt(numLight).toLowerCase()) {
+      if(CD.keypress(event) === (txt.charAt(numLight).toLowerCase() || txt.charAt(numLight).toUpperCase())) {
           CD.Assets.playSFX('pop', {volume: 1});
           CD.battleData.player.numLight++;
           CD.lightLetters(CD.battleData.player);
